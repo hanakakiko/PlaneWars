@@ -106,10 +106,12 @@ public class MyPanel extends JPanel {
 
     private void shot() {
         Iterator<Enemy> itEp = eps.iterator();
-        while(itEp.hasNext()){
-            Iterator<Fire> itF=fs.iterator();
-            while(itF.hasNext()){
-                if(itEp.next().isShot(itF.next())){
+        while (itEp.hasNext()) {
+            Enemy ep = itEp.next();
+            Iterator<Fire> itF = fs.iterator();
+            while (itF.hasNext()) {
+                Fire f = itF.next();
+                if (ep.isShot(f)) {
                     itEp.remove();
                     itF.remove();
                 }
