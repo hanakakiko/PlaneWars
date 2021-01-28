@@ -2,21 +2,24 @@ package ui;
 
 import java.awt.image.BufferedImage;
 
+//乙方战斗机类
 public class Hero extends FlyObject {
 
-    Hero(){
+    public Hero(){
       img = ImageUtil.getImage("/image/hero.png");
       x=200;
       y=500;
-        assert img != null;
-        w=img.getWidth();
+      w=img.getWidth();
       h=img.getHeight();
     };
+
+    //鼠标移动时的移动（鼠标始终位于图片中心）
     public void moveToMouse(int mx,int my){
         x=mx-w/2;
         y=my-h/2;
     };
 
+    //键盘操作时的移动
     public void moveUp() {
         y-=10;
     }
