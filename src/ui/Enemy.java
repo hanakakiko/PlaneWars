@@ -4,12 +4,16 @@ import java.util.Random;
 
 //敌方战斗机类
 public class Enemy extends FlyObject{
+    int sc;//击败敌机的加分
+    int hp;//敌机的血量
     int speed;//速度
     public Enemy(){
         Random random=new Random();
         //出现的敌机图片随机
         int index=random.nextInt(15)+1;//[1,16)
         img=ImageUtil.getImage("/image/ep"+(index<10?"0":"")+index+".png");
+        sc=index;//击败敌机的加分和难度有关，敌机越大血量越高加分越多
+        hp=index*5;//敌机的血量和机型大小有关
         speed=17-index;//速度和图片索引有关
         w=img.getWidth();
         h=img.getHeight();
@@ -29,5 +33,12 @@ public class Enemy extends FlyObject{
                 x+w>=f.x &&
                 y<=f.y+f.h &&
                 y+h>=f.y;
+    }
+
+    public boolean isHit(Hero hr) {
+        return x<=hr.x+hr.w &&
+                x+w>=hr.x &&
+                y<=hr.y+hr.h &&
+                y+h>=hr.y;
     }
 }
