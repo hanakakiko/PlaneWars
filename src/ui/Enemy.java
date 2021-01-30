@@ -4,6 +4,7 @@ import java.util.Random;
 
 //敌方战斗机类
 public class Enemy extends FlyObject{
+    int type;//敌机种类（有一些特性）
     int sc;//击败敌机的加分
     int hp;//敌机的血量
     int speed;//速度
@@ -12,9 +13,14 @@ public class Enemy extends FlyObject{
         //出现的敌机图片随机
         int index=random.nextInt(15)+1;//[1,16)
         img=ImageUtil.getImage("/image/ep"+(index<10?"0":"")+index+".png");
+        type = index;//种类就等于index
         sc=index;//击败敌机的加分和难度有关，敌机越大血量越高加分越多
-        hp=index*5;//敌机的血量和机型大小有关
-        speed=17-index;//速度和图片索引有关
+        hp=index*3;//敌机的血量和机型大小有关
+        if(type==15){
+            speed=20;//导弹速度非常快
+        }else{
+            speed=17-index;//速度和图片索引有关
+        }
         w=img.getWidth();
         h=img.getHeight();
         //出现时的横坐标随机
@@ -24,7 +30,17 @@ public class Enemy extends FlyObject{
 
     //移动
     void move(){
-        y+=speed;//不同战斗机移动速度不同
+        if(type==5){
+            y+=5;
+            x-=2;//斜左飞
+        }
+        else if(type==6){
+            y+=5;
+            x+=2;//斜右飞
+        }
+        else{
+            y+=speed;//不同战斗机移动速度不同
+        }
     }
 
     //判断战斗机是否被子弹击中（战斗机图片是否与子弹图片部分重合）
