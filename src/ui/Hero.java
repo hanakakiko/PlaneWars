@@ -4,13 +4,14 @@ import java.awt.image.BufferedImage;
 
 //乙方战斗机类
 public class Hero extends FlyObject {
-
+    int hp;
     public Hero(){
       img = ImageUtil.getImage("/image/hero.png");
       x=200;
       y=500;
       w=img.getWidth();
       h=img.getHeight();
+      hp=3;
     };
 
     //鼠标移动时的移动（鼠标始终位于图片中心）
