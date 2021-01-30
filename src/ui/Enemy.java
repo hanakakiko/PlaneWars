@@ -13,7 +13,7 @@ public class Enemy extends FlyObject{
         int index=random.nextInt(15)+1;//[1,16)
         img=ImageUtil.getImage("/image/ep"+(index<10?"0":"")+index+".png");
         sc=index;//击败敌机的加分和难度有关，敌机越大血量越高加分越多
-        hp=index*5;//敌机的血量和机型大小有关
+        hp=index*3;//敌机的血量和机型大小有关
         speed=17-index;//速度和图片索引有关
         w=img.getWidth();
         h=img.getHeight();

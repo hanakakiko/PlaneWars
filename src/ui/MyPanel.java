@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class MyPanel extends JPanel {
     boolean gameOver;//默认为false
-    List<Enemy> eps = Collections.synchronizedList(new ArrayList<Enemy>());//创建敌机大本营
-    List<Fire> fs = Collections.synchronizedList(new ArrayList<Fire>());//创建弹药库（最好写在Hero里）
+    List<Enemy> eps = new ArrayList<Enemy>();//创建敌机大本营
+    List<Fire> fs = new ArrayList<Fire>();//创建弹药库（最好写在Hero里）
     BufferedImage bgIm;//背景图片
     Hero hero = new Hero();//己方战斗机
     int score;//分数
@@ -86,9 +86,15 @@ public class MyPanel extends JPanel {
         //画战斗机
         g.drawImage(hero.img,hero.x,hero.y,hero.w,hero.h, null);
         //遍历画敌机
-        for (Enemy enemy : eps) {
+        for (int i = 0; i < eps.size(); i++) {
+            Enemy enemy = eps.get(i);
             g.drawImage(enemy.img, enemy.x, enemy.y, enemy.w, enemy.h, null);
         }
+        /*
+        for (Enemy enemy : eps) {
+            g.drawImage(enemy.img, enemy.x, enemy.y, enemy.w, enemy.h, null);
+        }*/
+
         //画子弹
         for (int i = 0; i < fs.size(); i++) {
             Fire f = fs.get(i);
@@ -134,7 +140,7 @@ public class MyPanel extends JPanel {
         while(itEp.hasNext()){
             Enemy ep = itEp.next();
             if(ep.isHit(hero)){
-                eps.remove(ep);
+                itEp.remove();//这里一定要用迭代器删除，不能用eps.remove(ep)，否则检测到修改数不一致会报错
                 hero.hp--;//与敌机碰撞，减少一次生命值
                 repaint();//画面上的生命值图标减少一个
                 if(hero.hp<=0){//三条生命全部耗尽，游戏结束
