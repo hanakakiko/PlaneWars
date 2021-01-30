@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 //乙方战斗机类
 public class Hero extends FlyObject {
     int hp;
+    int firePower=1;//设置火力（子弹排数）
     public Hero(){
       img = ImageUtil.getImage("/image/hero.png");
       x=200;
